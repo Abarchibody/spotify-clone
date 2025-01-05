@@ -18,57 +18,28 @@ import 'domain/usecases/auth/sigin.dart';
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
- 
- 
- sl.registerSingleton<AuthFirebaseService>(
-  AuthFirebaseServiceImpl()
- );
+  sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
 
- sl.registerSingleton<SongFirebaseService>(
-  SongFirebaseServiceImpl()
- );
- 
+  sl.registerSingleton<SongFirebaseService>(SongFirebaseServiceImpl());
 
- sl.registerSingleton<AuthRepository>(
-  AuthRepositoryImpl()
- );
+  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
 
- sl.registerSingleton<SongsRepository>(
-  SongRepositoryImpl()
- );
+  sl.registerSingleton<SongsRepository>(SongRepositoryImpl());
 
+  sl.registerSingleton<SignupUseCase>(SignupUseCase());
 
+  sl.registerSingleton<SigninUseCase>(SigninUseCase());
 
- sl.registerSingleton<SignupUseCase>(
-  SignupUseCase()
- );
+  sl.registerSingleton<GetNewsSongsUseCase>(GetNewsSongsUseCase());
 
- sl.registerSingleton<SigninUseCase>(
-  SigninUseCase()
- );
+  sl.registerSingleton<GetPlayListUseCase>(GetPlayListUseCase());
 
- sl.registerSingleton<GetNewsSongsUseCase>(
-  GetNewsSongsUseCase()
- );
+  sl.registerSingleton<AddOrRemoveFavoriteSongUseCase>(
+      AddOrRemoveFavoriteSongUseCase());
 
- sl.registerSingleton<GetPlayListUseCase>(
-  GetPlayListUseCase()
- );
+  sl.registerSingleton<IsFavoriteSongUseCase>(IsFavoriteSongUseCase());
 
- sl.registerSingleton<AddOrRemoveFavoriteSongUseCase>(
-  AddOrRemoveFavoriteSongUseCase()
- );
+  sl.registerSingleton<GetUserUseCase>(GetUserUseCase());
 
- sl.registerSingleton<IsFavoriteSongUseCase>(
-  IsFavoriteSongUseCase()
- );
-
- sl.registerSingleton<GetUserUseCase>(
-  GetUserUseCase()
- );
-
- sl.registerSingleton<GetFavoriteSongsUseCase>(
-  GetFavoriteSongsUseCase()
- );
- 
+  sl.registerSingleton<GetFavoriteSongsUseCase>(GetFavoriteSongsUseCase());
 }

@@ -7,16 +7,20 @@ import 'package:spotify/core/configs/assets/app_vectors.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/presentation/auth/pages/signin.dart';
 import 'package:spotify/presentation/auth/pages/signup.dart';
+import 'package:spotify/presentation/splash/bloc/land_page_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 
 class SignupOrSigninPage extends StatelessWidget {
   const SignupOrSigninPage({super.key});
+  static const String route = '/signup-or-signin';
 
   static const double _spacing = 20; // Centralized spacing constant
 
   @override
   Widget build(BuildContext context) {
+    context.read<LandPageCubit>().updateLandPage(route);
     return Scaffold(
       body: Stack(
         children: [

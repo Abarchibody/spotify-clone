@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify/common/helpers/is_dark_mode.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
 import 'package:spotify/presentation/home/widgets/news_songs.dart';
 import 'package:spotify/presentation/home/widgets/play_list.dart';
 import 'package:spotify/presentation/profile/pages/profile.dart';
+import 'package:spotify/presentation/splash/bloc/land_page_cubit.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../core/configs/assets/app_vectors.dart';
@@ -13,35 +15,37 @@ import '../../../core/configs/assets/app_vectors.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  static const String route = '/home';
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    context.read<LandPageCubit>().updateLandPage(HomePage.route);
+
     return Scaffold(
-       appBar: BasicAppbar(
+      appBar: BasicAppbar(
         hideBack: true,
         action: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => const ProfilePage())
-            );
-          },
-          icon: const Icon(
-            Icons.person
-          )
-        ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const ProfilePage()));
+            },
+            icon: const Icon(Icons.person)),
         title: SvgPicture.asset(
           AppVectors.logo,
           height: 40,
@@ -73,7 +77,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
-  Widget _homeTopCard(){
+  Widget _homeTopCard() {
     return Center(
       child: SizedBox(
         height: 140,
@@ -81,19 +85,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           children: [
             Align(
               alignment: Alignment.bottomCenter,
-              child: SvgPicture.asset(
-                AppVectors.homeTopCard
-              ),
+              child: SvgPicture.asset(AppVectors.homeTopCard),
             ),
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(
-                  right: 60
-                ),
-                child: Image.asset(
-                  AppImages.homeArtist
-                ),
+                padding: const EdgeInsets.only(right: 60),
+                child: Image.asset(AppImages.homeArtist),
               ),
             )
           ],
@@ -108,38 +106,23 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       isScrollable: true,
       labelColor: context.isDarkMode ? Colors.white : Colors.black,
       indicatorColor: AppColors.primary,
-      padding: const EdgeInsets.symmetric(
-        vertical: 40,
-        horizontal: 16
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
       tabs: const [
         Text(
           'News',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Videos',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Artists',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
           'Podcasts',
-           style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         )
       ],
     );

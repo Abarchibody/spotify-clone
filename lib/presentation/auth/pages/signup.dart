@@ -12,6 +12,8 @@ import 'package:spotify/service_locator.dart';
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
 
+  static const String route = '/signup';
+
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();

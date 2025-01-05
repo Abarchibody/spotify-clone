@@ -13,6 +13,8 @@ import '../../home/pages/home.dart';
 class SigninPage extends StatelessWidget {
   SigninPage({super.key});
 
+  static const String route = '/signin';
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -28,44 +30,43 @@ class SigninPage extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-        vertical: 50,
-        horizontal: 30
-      ),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _registerText(),
-            const SizedBox(height: 50,),
+            const SizedBox(
+              height: 50,
+            ),
             _emailField(context),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             _passwordField(context),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             BasicAppButton(
-              onPressed: () async {
-                 var result = await sl<SigninUseCase>().call(
-                  params: SigninUserReq(
-                    email: _email.text.toString(),
-                    password: _password.text.toString()
-                  )
-                );
-                result.fold(
-                  (l){
-                    var snackbar = SnackBar(content: Text(l),behavior: SnackBarBehavior.floating,);
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
-                  (r){
-                    Navigator.pushAndRemoveUntil(
-                      context, 
-                      MaterialPageRoute(builder: (BuildContext context) => const HomePage()), 
-                      (route) => false
+                onPressed: () async {
+                  var result = await sl<SigninUseCase>().call(
+                      params: SigninUserReq(
+                          email: _email.text.toString(),
+                          password: _password.text.toString()));
+                  result.fold((l) {
+                    var snackbar = SnackBar(
+                      content: Text(l),
+                      behavior: SnackBarBehavior.floating,
                     );
-                  }
-                );
-              },
-              title: 'Sign In'
-            )
-      
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }, (r) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      HomePage.route,
+                      (route) => false,
+                    );
+                  });
+                },
+                title: 'Sign In')
           ],
         ),
       ),
@@ -75,65 +76,45 @@ class SigninPage extends StatelessWidget {
   Widget _registerText() {
     return const Text(
       'Sign In',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 25
-      ),
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
       textAlign: TextAlign.center,
     );
   }
-  
- 
+
   Widget _emailField(BuildContext context) {
     return TextField(
       controller: _email,
-      decoration: const InputDecoration(
-        hintText: 'Enter Email'
-      ).applyDefaults(
-        Theme.of(context).inputDecorationTheme
-      ),
+      decoration: const InputDecoration(hintText: 'Enter Email')
+          .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 
-   Widget _passwordField(BuildContext context) {
+  Widget _passwordField(BuildContext context) {
     return TextField(
       controller: _password,
-      decoration: const InputDecoration(
-        hintText: 'Password'
-      ).applyDefaults(
-        Theme.of(context).inputDecorationTheme
-      ),
+      decoration: const InputDecoration(hintText: 'Password')
+          .applyDefaults(Theme.of(context).inputDecorationTheme),
     );
   }
 
   Widget _signupText(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 30
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
             'Not A Member? ',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14
-            ),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
           ),
           TextButton(
-            onPressed: (){
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => SignupPage()
-                )
-              );
-            },
-            child: const Text(
-              'Register Now'
-            )
-          )
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => SignupPage()));
+              },
+              child: const Text('Register Now'))
         ],
       ),
     );

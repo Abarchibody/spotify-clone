@@ -8,6 +8,7 @@ import 'package:spotify/presentation/choose_mode/pages/choose_mode.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
+  static const String route = '/get-started';
 
   @override
   Widget build(BuildContext context) {
