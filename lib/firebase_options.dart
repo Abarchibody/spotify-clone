@@ -41,46 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDwxQPdGbSiD5dcVGh88R23lGMImKCxtKs',
-    appId: '1:426509858399:web:4b4738cef4e35016264dea',
-    messagingSenderId: '426509858399',
-    projectId: 'spotify0101',
-    authDomain: 'spotify0101.firebaseapp.com',
-    storageBucket: 'spotify0101.appspot.com',
+    apiKey: 'AIzaSyAs072h5jpe1nC-3dZMvxtUHjM44QYk3B0',
+    appId: '1:420920607861:web:3d465993e409513b92643c',
+    messagingSenderId: '420920607861',
+    projectId: 'muzika-plus',
+    authDomain: 'muzika-plus.firebaseapp.com',
+    storageBucket: 'muzika-plus.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAwAF_v-n8bHO0Nrf_x0VvqALRxIN436OM',
-    appId: '1:426509858399:android:a9f0dd91f4d88cb2264dea',
-    messagingSenderId: '426509858399',
-    projectId: 'spotify0101',
-    storageBucket: 'spotify0101.appspot.com',
+    apiKey: 'AIzaSyBQ8QWGsa919K4eYQAyp1r0drdzAWQQW1o',
+    appId: '1:420920607861:android:d407adf1ad91d58092643c',
+    messagingSenderId: '420920607861',
+    projectId: 'muzika-plus',
+    storageBucket: 'muzika-plus.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBumD8nn8O9ISMsaxhBT-duBGi1YSZAsSk',
-    appId: '1:426509858399:ios:78d9d14dc192a583264dea',
-    messagingSenderId: '426509858399',
-    projectId: 'spotify0101',
-    storageBucket: 'spotify0101.appspot.com',
+    apiKey: 'AIzaSyC_G-Auws0uc69CS1Fpmt4fxcp7TNYhreE',
+    appId: '1:420920607861:ios:c33a711f31c5290b92643c',
+    messagingSenderId: '420920607861',
+    projectId: 'muzika-plus',
+    storageBucket: 'muzika-plus.firebasestorage.app',
     iosBundleId: 'com.example.spotify',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBumD8nn8O9ISMsaxhBT-duBGi1YSZAsSk',
-    appId: '1:426509858399:ios:78d9d14dc192a583264dea',
-    messagingSenderId: '426509858399',
-    projectId: 'spotify0101',
-    storageBucket: 'spotify0101.appspot.com',
+    apiKey: 'AIzaSyC_G-Auws0uc69CS1Fpmt4fxcp7TNYhreE',
+    appId: '1:420920607861:ios:c33a711f31c5290b92643c',
+    messagingSenderId: '420920607861',
+    projectId: 'muzika-plus',
+    storageBucket: 'muzika-plus.firebasestorage.app',
     iosBundleId: 'com.example.spotify',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDwxQPdGbSiD5dcVGh88R23lGMImKCxtKs',
-    appId: '1:426509858399:web:7367e344006c4003264dea',
-    messagingSenderId: '426509858399',
-    projectId: 'spotify0101',
-    authDomain: 'spotify0101.firebaseapp.com',
-    storageBucket: 'spotify0101.appspot.com',
+    apiKey: 'AIzaSyAs072h5jpe1nC-3dZMvxtUHjM44QYk3B0',
+    appId: '1:420920607861:web:b4d71cbd37a89a6b92643c',
+    messagingSenderId: '420920607861',
+    projectId: 'muzika-plus',
+    authDomain: 'muzika-plus.firebaseapp.com',
+    storageBucket: 'muzika-plus.firebasestorage.app',
   );
+
 }
