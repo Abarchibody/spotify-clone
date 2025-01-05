@@ -16,6 +16,8 @@ class ChooseModePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.watch<ThemeCubit>();
+
     return Scaffold(
       backgroundColor: AppColors.lightBackground,
       body: Stack(
@@ -63,10 +65,9 @@ class ChooseModePage extends StatelessWidget {
                       _ModeOption(
                         label: 'Dark Mode',
                         icon: AppVectors.moon,
+                        active: themeCubit.state == ThemeMode.dark,
                         onTap: () {
-                          context
-                              .read<ThemeCubit>()
-                              .updateTheme(ThemeMode.dark);
+                          themeCubit.updateTheme(ThemeMode.dark);
                         },
                       ),
                       const SizedBox(width: 40),
@@ -74,10 +75,9 @@ class ChooseModePage extends StatelessWidget {
                       _ModeOption(
                         label: 'Light Mode',
                         icon: AppVectors.sun,
+                        active: themeCubit.state == ThemeMode.light,
                         onTap: () {
-                          context
-                              .read<ThemeCubit>()
-                              .updateTheme(ThemeMode.light);
+                          themeCubit.updateTheme(ThemeMode.light);
                         },
                       ),
                     ],
@@ -111,12 +111,14 @@ class ChooseModePage extends StatelessWidget {
 class _ModeOption extends StatelessWidget {
   final String label;
   final String icon;
+  final bool active;
   final VoidCallback onTap;
 
   const _ModeOption({
     required this.label,
     required this.icon,
     required this.onTap,
+    required this.active,
   });
 
   @override
@@ -147,10 +149,10 @@ class _ModeOption extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 17,
-            color: AppColors.grey,
+            color: active ? AppColors.primary : AppColors.grey,
           ),
         ),
       ],
