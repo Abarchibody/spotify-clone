@@ -59,7 +59,7 @@ class GetStartedPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
                   BasicAppButton(
                     onPressed: () {
                       Navigator.push(

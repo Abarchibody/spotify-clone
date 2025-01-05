@@ -82,7 +82,7 @@ class ChooseModePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
                   // Continue Button
                   BasicAppButton(
                     onPressed: () {
@@ -117,7 +117,6 @@ class _ModeOption extends StatelessWidget {
     required this.label,
     required this.icon,
     required this.onTap,
-    super.key,
   });
 
   @override
