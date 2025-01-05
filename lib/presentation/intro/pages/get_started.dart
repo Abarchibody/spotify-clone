@@ -14,58 +14,67 @@ class GetStartedPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          // Background Image
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
             decoration: const BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(
-                      AppImages.introBG,
-                    ))),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(AppImages.introBG),
+              ),
+            ),
           ),
+          // Black overlay using .withValues()
           Container(
-            color: Colors.black.withOpacity(0.15),
+            color: const Color.fromARGB(255, 0, 0, 0).withValues(alpha: 180),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(AppVectors.logo),
-                ),
-                const Spacer(),
-                const Text(
-                  'Enjoy Listening To Music',
-                  style: TextStyle(
+          // Content
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: SvgPicture.asset(AppVectors.logo),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    'Enjoy Listening To Music',
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      fontSize: 18),
-                ),
-                const SizedBox(
-                  height: 21,
-                ),
-                const Text(
-                  'Lorem 2 ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                  style: TextStyle(
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                    style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: AppColors.grey,
-                      fontSize: 13),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                BasicAppButton(
+                      fontSize: 13,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  BasicAppButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const ChooseModePage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const ChooseModePage(),
+                        ),
+                      );
                     },
-                    title: 'Get Started')
-              ],
+                    title: 'Get Started',
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              ),
             ),
           ),
         ],
