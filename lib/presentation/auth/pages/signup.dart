@@ -12,64 +12,42 @@ import 'package:spotify/service_locator.dart';
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
 
-  final TextEditingController _fullName = TextEditingController();
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: _siginText(context),
-      appBar: BasicAppbar(
-        title: SvgPicture.asset(
-          AppVectors.logo,
-          height: 40,
-          width: 40,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(), // Dismiss keyboard
+      child: Scaffold(
+        bottomNavigationBar: _signinText(context),
+        appBar: BasicAppbar(
+          title: SvgPicture.asset(
+            AppVectors.logo,
+            height: 40,
+            width: 40,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(
-        vertical: 50,
-        horizontal: 30
-      ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _registerText(),
-            const SizedBox(height: 50,),
-            _fullNameField(context),
-            const SizedBox(height: 20,),
-            _emailField(context),
-            const SizedBox(height: 20,),
-            _passwordField(context),
-            const SizedBox(height: 20,),
-            BasicAppButton(
-              onPressed: () async {
-                var result = await sl<SignupUseCase>().call(
-                  params: CreateUserReq(
-                    fullName: _fullName.text.toString(),
-                    email: _email.text.toString(),
-                    password: _password.text.toString()
-                  )
-                );
-                result.fold(
-                  (l){
-                    var snackbar = SnackBar(content: Text(l),behavior: SnackBarBehavior.floating,);
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  },
-                  (r){
-                    Navigator.pushAndRemoveUntil(
-                      context, 
-                      MaterialPageRoute(builder: (BuildContext context) => const HomePage()), 
-                      (route) => false
-                    );
-                  }
-                );
-              },
-              title: 'Create Account'
-            )
-      
-          ],
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _registerText(),
+              const SizedBox(height: 50),
+              _fullNameField(context),
+              const SizedBox(height: 20),
+              _emailField(context),
+              const SizedBox(height: 20),
+              _passwordField(context),
+              const SizedBox(height: 20),
+              BasicAppButton(
+                onPressed: () => _handleSignup(context),
+                title: 'Create Account',
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -80,50 +58,44 @@ class SignupPage extends StatelessWidget {
       'Register',
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 25
+        fontSize: 25,
       ),
       textAlign: TextAlign.center,
     );
   }
-  
+
   Widget _fullNameField(BuildContext context) {
     return TextField(
-      controller: _fullName,
-      decoration: const InputDecoration(
-        hintText: 'Full Name'
-      ).applyDefaults(
-        Theme.of(context).inputDecorationTheme
+      controller: _fullNameController,
+      decoration: const InputDecoration(hintText: 'Full Name').applyDefaults(
+        Theme.of(context).inputDecorationTheme,
       ),
     );
   }
 
   Widget _emailField(BuildContext context) {
     return TextField(
-      controller: _email,
-      decoration: const InputDecoration(
-        hintText: 'Enter Email'
-      ).applyDefaults(
-        Theme.of(context).inputDecorationTheme
+      controller: _emailController,
+      decoration: const InputDecoration(hintText: 'Enter Email').applyDefaults(
+        Theme.of(context).inputDecorationTheme,
       ),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 
-   Widget _passwordField(BuildContext context) {
+  Widget _passwordField(BuildContext context) {
     return TextField(
-      controller: _password,
-      decoration: const InputDecoration(
-        hintText: 'Password'
-      ).applyDefaults(
-        Theme.of(context).inputDecorationTheme
+      controller: _passwordController,
+      obscureText: true, // Hide password
+      decoration: const InputDecoration(hintText: 'Password').applyDefaults(
+        Theme.of(context).inputDecorationTheme,
       ),
     );
   }
 
-  Widget _siginText(BuildContext context) {
+  Widget _signinText(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 30
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -131,24 +103,61 @@ class SignupPage extends StatelessWidget {
             'Do you have an account? ',
             style: TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 14
+              fontSize: 14,
             ),
           ),
           TextButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => SigninPage()
-                )
+                MaterialPageRoute(builder: (context) => SigninPage()),
               );
             },
-            child: const Text(
-              'Sign In'
-            )
-          )
+            child: const Text('Sign In'),
+          ),
         ],
       ),
+    );
+  }
+
+  Future<void> _handleSignup(BuildContext context) async {
+    // Basic validation
+    if (_fullNameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    final result = await sl<SignupUseCase>().call(
+      params: CreateUserReq(
+        fullName: _fullNameController.text.trim(),
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      ),
+    );
+
+    result.fold(
+      (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(failure),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      },
+      (success) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (route) => false,
+        );
+      },
     );
   }
 }
