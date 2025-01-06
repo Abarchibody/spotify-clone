@@ -40,10 +40,10 @@ class _HomePageState extends State<HomePage>
         hideBack: true,
         action: IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => const ProfilePage()));
+              Navigator.pushNamed(
+                context,
+                ProfilePage.route,
+              );
             },
             icon: const Icon(Icons.person)),
         title: SvgPicture.asset(

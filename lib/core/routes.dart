@@ -3,6 +3,7 @@ import 'package:spotify/presentation/auth/pages/signin.dart';
 import 'package:spotify/presentation/auth/pages/signup_or_siginin.dart';
 import 'package:spotify/presentation/home/pages/home.dart';
 import 'package:spotify/presentation/intro/pages/get_started.dart';
+import 'package:spotify/presentation/profile/pages/profile.dart';
 
 class Routes {
   static Route? onGenerateRoute(RouteSettings settings) {
@@ -15,6 +16,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => SigninPage());
       case HomePage.route:
         return MaterialPageRoute(builder: (_) => const HomePage());
+      case ProfilePage.route:
+        return MaterialPageRoute(builder: (_) => const ProfilePage());
       default:
         return MaterialPageRoute(builder: (_) => const GetStartedPage());
     }
