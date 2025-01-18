@@ -146,7 +146,8 @@ class ProfilePage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            '${AppURLs.coverFirestorage}${state.favoriteSongs[index].artist} - ${state.favoriteSongs[index].title}.jpg?${AppURLs.mediaAlt}'),
+                                          state.favoriteSongs[index].cover,
+                                        ),
                                       ),
                                     ),
                                   ),
