@@ -5,6 +5,7 @@ class SongEntity {
   final String artist;
   final String album;
   final String cover;
+  final String file;
   final num duration;
   final Timestamp releaseDate;
   final bool isFavorite;
@@ -14,6 +15,7 @@ class SongEntity {
     required this.title,
     required this.artist,
     required this.album,
+    required this.file,
     required this.cover,
     required this.duration,
     required this.releaseDate,

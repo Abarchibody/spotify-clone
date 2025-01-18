@@ -5,6 +5,7 @@ class SongModel {
   String? title;
   String? artist;
   String? album;
+  String? file;
   String? cover;
   num? duration;
   Timestamp? releaseDate;
@@ -16,6 +17,7 @@ class SongModel {
     required this.artist,
     required this.album,
     required this.cover,
+    required this.file,
     required this.duration,
     required this.releaseDate,
     required this.isFavorite,
@@ -27,6 +29,7 @@ class SongModel {
     artist = data['artist'];
     album = data['album'];
     cover = data['cover'];
+    file = data['file'];
     duration = data['duration'];
     releaseDate = data['releaseDate'];
   }
@@ -37,6 +40,7 @@ extension SongModelX on SongModel {
     return SongEntity(
       title: title!,
       artist: artist!,
+      file: file!,
       album: album!,
       cover: cover!,
       duration: duration!,
