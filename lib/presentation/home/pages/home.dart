@@ -39,13 +39,14 @@ class _HomePageState extends State<HomePage>
       appBar: BasicAppbar(
         hideBack: true,
         action: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                ProfilePage.route,
-              );
-            },
-            icon: const Icon(Icons.person)),
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              ProfilePage.route,
+            );
+          },
+          icon: const Icon(Icons.person),
+        ),
         title: SvgPicture.asset(
           AppVectors.logo,
           height: 40,

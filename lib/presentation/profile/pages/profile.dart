@@ -45,8 +45,9 @@ class ProfilePage extends StatelessWidget {
         decoration: BoxDecoration(
           color: context.isDarkMode ? const Color(0xff2C2B2B) : Colors.white,
           borderRadius: const BorderRadius.only(
-              bottomRight: Radius.circular(50),
-              bottomLeft: Radius.circular(50)),
+            bottomRight: Radius.circular(50),
+            bottomLeft: Radius.circular(50),
+          ),
         ),
         child: BlocBuilder<ProfileInfoCubit, ProfileInfoState>(
           builder: (context, state) {

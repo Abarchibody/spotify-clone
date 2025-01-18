@@ -33,6 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushReplacementNamed(
         context,
         context.read<LandPageCubit>().state,
+        // '/signin',
       );
     }
   }

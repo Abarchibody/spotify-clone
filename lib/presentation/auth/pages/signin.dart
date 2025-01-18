@@ -49,9 +49,11 @@ class SigninPage extends StatelessWidget {
             BasicAppButton(
                 onPressed: () async {
                   var result = await sl<SigninUseCase>().call(
-                      params: SigninUserReq(
-                          email: _email.text.toString(),
-                          password: _password.text.toString()));
+                    params: SigninUserReq(
+                      email: _email.text.toString(),
+                      password: _password.text.toString(),
+                    ),
+                  );
                   result.fold((l) {
                     var snackbar = SnackBar(
                       content: Text(l),
