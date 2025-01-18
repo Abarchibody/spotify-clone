@@ -24,7 +24,7 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl());
 
-  sl.registerSingleton<SongsRepository>(SongRepositoryImpl());
+  sl.registerSingleton<SongsRepository>(SongsRepositoryImpl());
 
   sl.registerSingleton<SignupUseCase>(SignupUseCase());
 
