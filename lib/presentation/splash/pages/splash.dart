@@ -30,12 +30,12 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
-      // Navigator.pushReplacementNamed(
-      //   context,
-      //   context.read<LandPageCubit>().state,
-      //   // '/signin',
-      //   // '/get-started',
-      // );
+      Navigator.pushReplacementNamed(
+        context,
+        context.read<LandPageCubit>().state,
+        // '/signin',
+        // '/get-started',
+      );
     }
   }
 }
