@@ -34,13 +34,9 @@ class SongPlayerPage extends StatelessWidget {
             return Column(
               children: [
                 _songCover(context),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 _songDetail(),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 _songPlayer(context)
               ],
             );
@@ -67,21 +63,25 @@ class SongPlayerPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              songEntity.title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              songEntity.artist,
-              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                songEntity.title,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                songEntity.artist,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
         FavoriteButton(songEntity: songEntity)
       ],

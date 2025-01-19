@@ -71,13 +71,9 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   Text(state.userEntity.email!),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Text(
                     state.userEntity.fullName!,
                     style: const TextStyle(
@@ -107,12 +103,8 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'FAVORITE SONGS',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            const Text('FAVORITE SONGS'),
+            const SizedBox(height: 20),
             BlocBuilder<FavoriteSongsCubit, FavoriteSongsState>(
               builder: (context, state) {
                 if (state is FavoriteSongsLoading) {
@@ -151,9 +143,7 @@ class ProfilePage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
+                                  const SizedBox(width: 10),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -161,30 +151,33 @@ class ProfilePage extends StatelessWidget {
                                       Text(
                                         state.favoriteSongs[index].title,
                                         style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
+                                      const SizedBox(height: 5),
                                       Text(
                                         state.favoriteSongs[index].artist,
                                         style: const TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 11),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 11,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
                                     ],
                                   )
                                 ],
                               ),
-                              Row(
+                              Column(
                                 children: [
-                                  Text(state.favoriteSongs[index].duration
-                                      .toString()
-                                      .replaceAll('.', ':')),
-                                  const SizedBox(
-                                    width: 20,
+                                  Text(
+                                    state.favoriteSongs[index].duration
+                                        .toString()
+                                        .replaceAll('.', ':'),
+                                    style: const TextStyle(fontSize: 14),
                                   ),
+                                  const SizedBox(height: 5),
                                   FavoriteButton(
                                     songEntity: state.favoriteSongs[index],
                                     key: UniqueKey(),
@@ -200,9 +193,8 @@ class ProfilePage extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 20,
-                          ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 20),
                       itemCount: state.favoriteSongs.length);
                 }
                 if (state is FavoriteSongsFailure) {
